@@ -1,0 +1,180 @@
+# Configuration File - Rajalakshmi Astro Guru Website
+# Update this file to easily customize your website without editing HTML/CSS
+
+##################################
+# CONTACT INFORMATION
+##################################
+BUSINESS_NAME=Rajalakshmi Astro Guru
+PRIMARY_PHONE=+91 93610 98711
+EMAIL=rajalakshmiastro@gmail.com
+WHATSAPP_NUMBER=919361098711
+WHATSAPP_LINK=https://wa.me/919361098711
+
+##################################
+# BUSINESS INFORMATION
+##################################
+YEARS_EXPERIENCE=10+
+TOTAL_CLIENTS=2000+
+SATISFACTION_RATE=100%
+
+# Professional background
+EDUCATION=English Literature Graduate
+SPECIALIZATIONS=Vedic Astrology, Marriage Guidance, Health Astrology, Vaasthu, Tarot
+
+##################################
+# WEBSITE COLORS (HEX CODES)
+##################################
+# Primary accent color
+PRIMARY_COLOR=#d4af37
+
+# Dark background colors
+BACKGROUND_DARK=#0f0419
+BACKGROUND_SECONDARY=#1a0933
+BACKGROUND_TERTIARY=#2d1b4e
+
+# Purple accent
+PURPLE_COLOR=#9d4edd
+
+##################################
+# SERVICES
+##################################
+# Format: SERVICE_NAME|ICON|DURATION|DESCRIPTION
+
+SERVICE_1=Marriage Guidance|fas fa-heart|45 min|Get clarity on marriage compatibility, timing, and life partner predictions.
+SERVICE_2=Health Astrology|fas fa-heartbeat|45 min|Understand health patterns and preventive measures from your birth chart.
+SERVICE_3=Vaasthu Consultation|fas fa-home|60 min|Harmonize your space for positive energy and prosperity.
+SERVICE_4=Tarot Reading|fas fa-cards|30 min|Gain deep insights into situations and get guidance on decisions.
+SERVICE_5=Vedic Astrology|fas fa-moon-stars|90 min|Complete birth chart analysis for life goals and career guidance.
+
+##################################
+# SOCIAL MEDIA LINKS
+##################################
+FACEBOOK_URL=https://facebook.com/rajalakshmiastro
+INSTAGRAM_URL=https://instagram.com/rajalakshmiastro
+TWITTER_URL=https://twitter.com/rajalakshmiastro
+YOUTUBE_URL=https://youtube.com/@rajalakshmiastro
+
+##################################
+# SEO & META INFORMATION
+##################################
+SITE_TITLE=Rajalakshmi Astro Guru - Premium Astrology Consultation
+SITE_DESCRIPTION=Expert astrology consultation for marriage, health, vaasthu, tarot & vedic astrology. Over 10 years experience with 2000+ satisfied clients.
+SITE_KEYWORDS=astrology, marriage guidance, health astrology, vaasthu, tarot, vedic astrology, consultation
+SITE_AUTHOR=Rajalakshmi Astro Guru
+
+##################################
+# ANALYTICS & TRACKING
+##################################
+# Google Analytics (Add your tracking ID)
+GOOGLE_ANALYTICS_ID=UA-XXXXXXXXX-X
+
+# Google Search Console verification code
+GOOGLE_SITE_VERIFICATION=
+
+##################################
+# TIMEZONE & LOCATION
+##################################
+TIMEZONE=Asia/Kolkata
+COUNTRY=India
+CITY=Chennai
+STATE=Tamil Nadu
+CURRENCY=INR
+
+##################################
+# BOOKING SETTINGS
+##################################
+# Time slots available for booking
+BOOKING_TIMEZONE=Asia/Kolkata
+BOOKING_ADVANCE_DAYS=30
+
+# Time slots (24-hour format)
+SLOT_1=09:00-10:00
+SLOT_2=10:00-11:00
+SLOT_3=14:00-15:00
+SLOT_4=15:00-16:00
+SLOT_5=17:00-18:00
+SLOT_6=18:00-19:00
+
+##################################
+# TESTIMONIALS
+##################################
+# Add or update testimonials in index.html
+# Format: NAME|CITY|SERVICE|RATING|TEXT
+
+##################################
+# WEBSITE FEATURES
+##################################
+# Enable/Disable features
+ENABLE_LIVE_CHAT=false
+ENABLE_APPOINTMENT_CALENDAR=false
+ENABLE_PAYMENT_GATEWAY=false
+ENABLE_NEWSLETTER=false
+ENABLE_BLOG=false
+
+##################################
+# EMAIL SETTINGS (For form submissions)
+##################################
+# If using EmailJS
+EMAILJS_SERVICE_ID=
+EMAILJS_TEMPLATE_ID=
+EMAILJS_PUBLIC_KEY=
+
+# If using Firebase
+FIREBASE_API_KEY=
+FIREBASE_PROJECT_ID=
+
+##################################
+# CDN & EXTERNAL LIBRARIES
+##################################
+# These are configured in index.html
+BOOTSTRAP_VERSION=5.3.0
+FONTAWESOME_VERSION=6.4.0
+AOS_VERSION=2.3.1
+
+##################################
+# IMAGE PATHS
+##################################
+LOGO_PATH=images/logo.png
+ABOUT_IMAGE_PATH=images/about-rajalakshmi.jpg
+ASTROLOGY_CHART_PATH=images/astrology-chart.png
+HERO_IMAGE_PATH=images/hero.png
+
+##################################
+# LEGAL & COMPLIANCE
+##################################
+BUSINESS_REGISTRATION=
+BUSINESS_LICENSE=
+PRIVACY_POLICY_URL=#
+TERMS_CONDITIONS_URL=#
+DISCLAIMER=This website is for informational purposes only. Astrological readings are not a substitute for professional advice. Consult qualified professionals for important decisions.
+
+##################################
+# DEPLOYMENT SETTINGS
+##################################
+ENVIRONMENT=production
+DEBUG_MODE=false
+CACHE_ENABLED=true
+CDN_ENABLED=true
+
+# Domain (update when deploying)
+DOMAIN_URL=https://yourdomain.com
+PROTOCOL=https
+
+##################################
+# MAINTENANCE SETTINGS
+##################################
+# Set to true to show maintenance page
+MAINTENANCE_MODE=false
+
+# Email for support requests
+SUPPORT_EMAIL=support@rajalakshmiastro.com
+
+##################################
+# NOTES & CUSTOM SETTINGS
+##################################
+# Add any custom notes or settings here
+# These can be referenced in your scripts
+
+CUSTOM_NOTE_1=Premium luxury astrology website template
+CUSTOM_NOTE_2=Fully responsive design with modern animations
+CUSTOM_NOTE_3=Ready for deployment on any web server

@@ -1,0 +1,47 @@
+# Robots.txt for Rajalakshmi Astro Guru Website
+# Place in root directory
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow private/admin files
+Disallow: /admin/
+Disallow: /private/
+Disallow: /config/
+Disallow: /.env
+Disallow: /.git/
+
+# Disallow backup files
+Disallow: /*.bak$
+Disallow: /*.backup$
+Disallow: /*.old$
+Disallow: /*~$
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Specific rules for popular search engines
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
