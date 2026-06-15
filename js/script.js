@@ -3,6 +3,16 @@
 // ========================================
 
 // ========================================
+// EMAILJS CONFIGURATION
+// ========================================
+
+// Initialize EmailJS with your public key
+emailjs.init('625F7QNxzXzhrEC77');
+
+const EMAILJS_SERVICE_ID = 'service_6hq77fu';
+const EMAILJS_TEMPLATE_ID = 'template_cyo7tao';
+
+// ========================================
 // INITIALIZATION
 // ========================================
 
@@ -196,7 +206,66 @@ function showError(message) {
 
 function setupFormSubmission() {
     // This function sets up form submission handlers
-    // You can integrate EmailJS or Firebase here
+    // EmailJS is integrated in the Razorpay payment handler
+}
+
+// ========================================
+// EMAILJS FUNCTIONS
+// ========================================
+
+function sendConfirmationEmail(formData) {
+    // Prepare email template parameters - must match your EmailJS template variables
+    const templateParams = {
+        to_email: formData.email,
+        to_name: formData.fullName,
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        birthDate: formData.birthDate,
+        consultationType: formatConsultationType(formData.consultationType),
+        timeSlot: formData.timeSlot,
+        amount: formData.amount,
+        paymentId: formData.paymentId,
+        message: formData.message || 'No additional message provided',
+        date: new Date().toLocaleString()
+    };
+
+    // Send email using EmailJS
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then(function(response) {
+            console.log('✓ Confirmation email sent successfully!', response.status, response.text);
+        })
+        .catch(function(error) {
+            console.error('✗ Failed to send confirmation email:', error);
+            // Email failed, but don't disrupt user experience
+            console.log('Note: Email notification could not be sent, but booking is confirmed.');
+        });
+}
+
+function sendAdminNotification(formData) {
+    // Optional: Send notification to admin
+    const templateParams = {
+        customer_name: formData.fullName,
+        customer_phone: formData.phone,
+        customer_email: formData.email,
+        birth_date: formData.birthDate,
+        consultation_type: formatConsultationType(formData.consultationType),
+        time_slot: formData.timeSlot,
+        amount: formData.amount,
+        payment_id: formData.paymentId
+    };
+
+    // You can send admin notifications by creating another template
+    // Uncomment the following when you create an admin notification template
+    /*
+    emailjs.send(EMAILJS_SERVICE_ID, 'admin_notification_template', templateParams)
+        .then(function(response) {
+            console.log('Admin notified of new booking:', response.status);
+        })
+        .catch(function(error) {
+            console.error('Failed to notify admin:', error);
+        });
+    */
 }
 
 function submitBookingForm(form) {
@@ -232,6 +301,10 @@ function submitBookingForm(form) {
         handler: function(response) {
             // Payment SUCCESS - show booking confirmation
             formData.paymentId = response.razorpay_payment_id;
+            
+            // Send confirmation email via EmailJS
+            sendConfirmationEmail(formData);
+            
             showSuccessPopup(formData);
             form.reset();
         },
