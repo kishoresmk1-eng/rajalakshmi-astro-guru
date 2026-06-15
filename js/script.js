@@ -215,7 +215,7 @@ function submitBookingForm(form) {
     // RAZORPAY PAYMENT INTEGRATION
     // ========================================
     const options = {
-        key: 'rzp_test_T02d3PJR6sM5cW', // 🔑 Replace with your Razorpay Key ID
+        key: 'rzp_live_T1udB1uYhyZcor', // 🔑 Replace with your Razorpay Key ID
         amount: formData.amount * 100, // Amount in paise (500 * 100 = 50000 paise = ₹500)
         currency: 'INR',
         name: 'Rajalakshmi Astro Guru',
