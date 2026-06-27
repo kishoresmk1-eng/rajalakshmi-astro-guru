@@ -341,7 +341,7 @@ function initiatePayment(formData, form) {
 
     // Create payment options
     const options = {
-        key: 'rzp_test_1DP5mmOlF5G0m1',
+        key: 'rzp_live_T6b3zSQbVM3l1v',
         amount: formData.amount * 100, // In paise
         currency: 'INR',
         name: 'Rajalakshmi Astro Guru',
