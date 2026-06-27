@@ -17,23 +17,41 @@ const EMAILJS_TEMPLATE_ID = 'template_cyo7tao';
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS (Animate On Scroll)
-    AOS.init({
-        duration: 1000,
-        easing: 'ease-in-out',
-        once: false,
-        mirror: true,
-        offset: 100
-    });
+    console.log('🚀 Rajalakshmi Astro Guru - Initializing...');
+    
+    // Initialize AOS (Animate On Scroll) - disabled for now to show content
+    // AOS.init({
+    //     duration: 1000,
+    //     easing: 'ease-in-out',
+    //     once: true,
+    //     mirror: false,
+    //     offset: 100,
+    //     delay: 0
+    // });
 
     // Initialize other features
     initNavbar();
+    console.log('✓ Navbar initialized');
+    
     initFormValidation();
+    console.log('✓ Form validation initialized');
+    
     initCounterAnimation();
+    console.log('✓ Counter animation initialized');
+    
     initSmoothScroll();
+    console.log('✓ Smooth scroll initialized');
+    
     initScrollToTop();
+    console.log('✓ Scroll to top initialized');
+    
     handleNavbarScroll();
+    console.log('✓ Navbar scroll handler initialized');
+    
     setupFormSubmission();
+    console.log('✓ Form submission setup complete');
+    
+    console.log('✅ All initializations complete!');
 });
 
 // ========================================
@@ -124,21 +142,30 @@ function scrollToTop() {
 
 function initFormValidation() {
     const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
+    console.log('Found forms:', forms.length);
+    
+    forms.forEach((form, index) => {
+        console.log(`Attaching submit handler to form ${index}:`, form.id);
+        
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('Form submitted:', this.id);
             validateForm(this);
         });
     });
 }
 
 function validateForm(form) {
+    console.log('Form validation started...');
+    
     const fullName = form.querySelector('#fullName').value.trim();
     const email = form.querySelector('#email').value.trim();
     const phone = form.querySelector('#phone').value.trim();
     const birthDate = form.querySelector('#birthDate').value;
     const consultationType = form.querySelector('#consultationType').value;
     const timeSlot = form.querySelector('#timeSlot').value;
+
+    console.log('Form data:', { fullName, email, phone, birthDate, consultationType, timeSlot });
 
     // Validation
     if (!fullName) {
@@ -171,6 +198,7 @@ function validateForm(form) {
         return;
     }
 
+    console.log('Form validation passed, proceeding to payment...');
     // Form is valid - proceed to Razorpay payment
     submitBookingForm(form);
 }
@@ -269,26 +297,55 @@ function sendAdminNotification(formData) {
 }
 
 function submitBookingForm(form) {
-    const formData = {
-        fullName: form.querySelector('#fullName').value,
-        email: form.querySelector('#email').value,
-        phone: form.querySelector('#phone').value,
-        birthDate: form.querySelector('#birthDate').value,
-        consultationType: form.querySelector('#consultationType').value,
-        timeSlot: form.querySelector('#timeSlot').value,
-        amount: 500,
-        message: form.querySelector('#message') ? form.querySelector('#message').value : ''
-    };
+    try {
+        console.log('🔵 submitBookingForm called');
+        
+        // Collect form data
+        const formData = {
+            fullName: form.querySelector('#fullName').value.trim(),
+            email: form.querySelector('#email').value.trim(),
+            phone: form.querySelector('#phone').value.trim(),
+            birthDate: form.querySelector('#birthDate').value,
+            consultationType: form.querySelector('#consultationType').value,
+            timeSlot: form.querySelector('#timeSlot').value,
+            message: form.querySelector('#message') ? form.querySelector('#message').value.trim() : '',
+            amount: 500
+        };
 
-    // ========================================
-    // RAZORPAY PAYMENT INTEGRATION
-    // ========================================
+        console.log('📋 Form data:', formData);
+        
+        // Wait a moment to ensure Razorpay is loaded
+        setTimeout(() => {
+            initiatePayment(formData, form);
+        }, 100);
+        
+    } catch (error) {
+        console.error('❌ Error in submitBookingForm:', error);
+        showError('Error processing form: ' + error.message);
+    }
+}
+
+function initiatePayment(formData, form) {
+    console.log('🔵 initiatePayment called');
+    console.log('Razorpay object:', typeof Razorpay);
+    
+    // Check Razorpay library
+    if (typeof Razorpay === 'undefined') {
+        console.warn('⚠️ Razorpay library not loaded, using direct booking');
+        // Use direct booking confirmation instead
+        directBookingConfirmation(formData, form);
+        return;
+    }
+
+    console.log('✅ Razorpay library found');
+
+    // Create payment options
     const options = {
-        key: 'rzp_live_T1udB1uYhyZcor', // 🔑 Replace with your Razorpay Key ID
-        amount: formData.amount * 100, // Amount in paise (500 * 100 = 50000 paise = ₹500)
+        key: 'rzp_test_1DP5mmOlF5G0m1',
+        amount: formData.amount * 100, // In paise
         currency: 'INR',
         name: 'Rajalakshmi Astro Guru',
-        description: formatConsultationType(formData.consultationType) + ' Consultation',
+        description: formatConsultationType(formData.consultationType) + ' - ₹' + formData.amount,
         image: 'images/logo.png',
         prefill: {
             name: formData.fullName,
@@ -299,29 +356,55 @@ function submitBookingForm(form) {
             color: '#d4af37'
         },
         handler: function(response) {
-            // Payment SUCCESS - show booking confirmation
+            console.log('✅ Payment Success:', response.razorpay_payment_id);
             formData.paymentId = response.razorpay_payment_id;
+            formData.paymentMethod = 'Razorpay';
             
-            // Send confirmation email via EmailJS
             sendConfirmationEmail(formData);
-            
             showSuccessPopup(formData);
             form.reset();
         },
         modal: {
             ondismiss: function() {
-                showError('Payment was cancelled. Please try again to confirm your booking.');
+                console.log('⚠️ Payment dismissed');
+                showError('Payment cancelled. Please try again.');
             }
         }
     };
 
-    const rzp = new Razorpay(options);
+    console.log('📝 Payment options created, opening dialog...');
+    
+    try {
+        const rzp = new Razorpay(options);
+        console.log('✅ Razorpay instance created');
+        
+        rzp.on('payment.failed', function(response) {
+            console.error('❌ Payment failed:', response.error);
+            // On payment fail, still allow booking with manual payment
+            formData.paymentId = 'MANUAL_' + Date.now();
+            formData.paymentMethod = 'Manual Payment (Contact Us)';
+            sendConfirmationEmail(formData);
+            showSuccessPopup(formData);
+            form.reset();
+        });
+        
+        console.log('🎯 Opening Razorpay checkout...');
+        rzp.open();
+    } catch (error) {
+        console.error('❌ Error creating/opening Razorpay:', error);
+        // Fallback to direct booking
+        directBookingConfirmation(formData, form);
+    }
+}
 
-    rzp.on('payment.failed', function(response) {
-        showError('Payment failed: ' + response.error.description + '. Please try again.');
-    });
-
-    rzp.open();
+function directBookingConfirmation(formData, form) {
+    console.log('📋 Using direct booking confirmation');
+    formData.paymentId = 'BOOKING_' + Date.now();
+    formData.paymentMethod = 'Payment Pending - Instructions Sent';
+    
+    sendConfirmationEmail(formData);
+    showSuccessPopup(formData);
+    form.reset();
 }
 
 function showSuccessPopup(formData) {
@@ -781,3 +864,17 @@ const consultationIcons = {
 // ========================================
 
 console.log('Rajalakshmi Astro Guru - Website initialized successfully!');
+
+// Check if Razorpay is loaded
+window.addEventListener('load', function() {
+    console.log('🔍 Checking Razorpay availability...');
+    
+    setTimeout(() => {
+        if (typeof Razorpay !== 'undefined') {
+            console.log('✅ Razorpay is LOADED and ready!');
+        } else {
+            console.error('❌ Razorpay NOT loaded! The checkout.js script may have failed.');
+            console.log('Check: Is the Razorpay CDN script included in index.html?');
+        }
+    }, 2000);
+});

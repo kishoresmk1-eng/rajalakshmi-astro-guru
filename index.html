@@ -669,9 +669,20 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
     
     <!-- Razorpay Payment SDK -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js" onload="console.log('✅ Razorpay script loaded')" onerror="console.error('❌ Razorpay script failed to load')"></script>
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    
+    <script>
+        // Verify all libraries are loaded
+        window.addEventListener('load', function() {
+            console.log('=== Library Status ===');
+            console.log('Razorpay:', typeof Razorpay !== 'undefined' ? '✅ READY' : '❌ NOT LOADED');
+            console.log('EmailJS:', typeof emailjs !== 'undefined' ? '✅ READY' : '❌ NOT LOADED');
+            console.log('Bootstrap:', typeof bootstrap !== 'undefined' ? '✅ READY' : '❌ NOT LOADED');
+            console.log('======================');
+        });
+    </script>
 </body>
 </html>

@@ -96,7 +96,7 @@ h2 {
 }
 
 p {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--text-light);
 }
 
@@ -515,13 +515,13 @@ p {
     font-family: 'Cinzel', serif;
     font-weight: 700;
     margin-bottom: 15px;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 }
 
 .card-description {
     color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
 /* Approach Section */
@@ -605,14 +605,14 @@ p {
     font-family: 'Cinzel', serif;
     font-weight: 700;
     margin-bottom: 12px;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .service-description {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 15px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .service-meta {
@@ -624,7 +624,7 @@ p {
 
 .duration {
     color: var(--gold);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 500;
 }
 
@@ -674,7 +674,7 @@ p {
     color: var(--text-muted);
     margin-bottom: 15px;
     line-height: 1.8;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
 }
 
 .stats-container {
@@ -796,7 +796,7 @@ p {
 
 .testimonial-text {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 15px;
     font-style: italic;
@@ -902,6 +902,7 @@ p {
     color: var(--text-light);
     font-weight: 500;
     margin-bottom: 8px;
+    font-size: 1.05rem;
 }
 
 .form-control-gold,
@@ -911,7 +912,8 @@ p {
     color: var(--text-light);
     transition: var(--transition);
     border-radius: 8px;
-    padding: 10px 15px;
+    padding: 12px 15px;
+    font-size: 1rem;
 }
 
 .form-control-gold:focus,
@@ -1304,7 +1306,13 @@ p {
 }
 
 .aos-init {
-    opacity: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+[data-aos] {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .aos-animate {
